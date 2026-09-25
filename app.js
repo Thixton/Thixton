@@ -225,10 +225,15 @@ function renderProjectPhoto(index, transition = false) {
 
   const item = currentProjectImages[currentProjectImageIndex];
   const img = document.getElementById('modalProjectImg');
+  const wrapper = document.getElementById('projectSliderWrapper');
   const capTitle = document.getElementById('projectCaptionTitle');
   const capSub = document.getElementById('projectCaptionSub');
   const counter = document.getElementById('projectGalleryCounter');
   const dotsContainer = document.getElementById('projectGalleryDots');
+
+  if (wrapper) {
+    wrapper.style.backgroundColor = item.bg || '#0e121a';
+  }
 
   if (transition && img) {
     img.style.opacity = '0.35';
@@ -413,6 +418,100 @@ function closeProjectModal(fromPopState = false) {
   }
 }
 
+/**
+ * Modal de Visualización Embebida y Descarga de Curriculum Vitae
+ */
+const cvConfig = {
+  es: {
+    title: 'Curriculum Vitae — Juan Bautista García Thixton (Español)',
+    embedUrl: 'https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/preview',
+    viewUrl: 'https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link',
+    downloadUrl: 'https://drive.google.com/uc?export=download&id=1UPweubRLChRQMcndr150nxgOMerf911R'
+  },
+  en: {
+    title: 'Curriculum Vitae — Juan Bautista García Thixton (English)',
+    embedUrl: 'https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/preview',
+    viewUrl: 'https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link',
+    downloadUrl: 'https://drive.google.com/uc?export=download&id=1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT'
+  }
+};
+
+let currentCvLang = 'es';
+
+function switchCvLanguage(lang) {
+  if (!cvConfig[lang]) return;
+  currentCvLang = lang;
+
+  const tabEs = document.getElementById('cvTabEs');
+  const tabEn = document.getElementById('cvTabEn');
+  const iframe = document.getElementById('cvIframe');
+  const loader = document.getElementById('cvLoader');
+  const directDownloadBtn = document.getElementById('cvDirectDownloadBtn');
+  const openDriveBtn = document.getElementById('cvOpenDriveBtn');
+  const bottomDownloadBtn = document.getElementById('cvBottomDownloadBtn');
+  const titleEl = document.getElementById('cvModalTitle');
+
+  if (tabEs) {
+    tabEs.classList.toggle('active', lang === 'es');
+    tabEs.setAttribute('aria-selected', lang === 'es' ? 'true' : 'false');
+  }
+  if (tabEn) {
+    tabEn.classList.toggle('active', lang === 'en');
+    tabEn.setAttribute('aria-selected', lang === 'en' ? 'true' : 'false');
+  }
+
+  const conf = cvConfig[lang];
+  if (titleEl) titleEl.textContent = conf.title;
+  if (directDownloadBtn) directDownloadBtn.href = conf.downloadUrl;
+  if (bottomDownloadBtn) bottomDownloadBtn.href = conf.downloadUrl;
+  if (openDriveBtn) openDriveBtn.href = conf.viewUrl;
+
+  if (iframe) {
+    if (loader) loader.style.display = 'flex';
+    iframe.style.opacity = '0';
+    iframe.src = conf.embedUrl;
+    iframe.onload = () => {
+      if (loader) loader.style.display = 'none';
+      iframe.style.opacity = '1';
+    };
+  }
+}
+
+function openCvModal(lang = 'es') {
+  lastFocusedTrigger = document.activeElement;
+  const modal = document.getElementById('cvModal');
+  if (!modal) return;
+
+  switchCvLanguage(lang);
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const closeBtn = modal.querySelector('.cv-modal-close');
+  if (closeBtn) closeBtn.focus();
+
+  if (!history.state || history.state.modal !== 'cv') {
+    history.pushState({ modal: 'cv' }, '', '#curriculum');
+  }
+}
+
+function closeCvModal(fromPopState = false) {
+  const modal = document.getElementById('cvModal');
+  if (modal && modal.classList.contains('open')) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    const iframe = document.getElementById('cvIframe');
+    if (iframe) iframe.src = '';
+
+    if (!fromPopState && history.state && history.state.modal === 'cv') {
+      history.back();
+    }
+    if (lastFocusedTrigger) {
+      lastFocusedTrigger.focus();
+      lastFocusedTrigger = null;
+    }
+  }
+}
+
 // Soporte nativo para el botón 'Atrás' del celular o navegador
 window.addEventListener('popstate', () => {
   const photoModal = document.getElementById('photoModal');
@@ -423,11 +522,15 @@ window.addEventListener('popstate', () => {
   if (projectModal && projectModal.classList.contains('open')) {
     closeProjectModal(true);
   }
+  const cvModal = document.getElementById('cvModal');
+  if (cvModal && cvModal.classList.contains('open')) {
+    closeCvModal(true);
+  }
 });
 
 // Focus trap dentro de modales para accesibilidad WCAG por teclado
 document.addEventListener('keydown', (e) => {
-  const activeModal = document.querySelector('.photo-modal-backdrop.open, .project-modal-backdrop.open');
+  const activeModal = document.querySelector('.photo-modal-backdrop.open, .project-modal-backdrop.open, .cv-modal-backdrop.open');
   if (!activeModal) {
     return;
   }
@@ -435,6 +538,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closePhotoModal();
     closeProjectModal();
+    closeCvModal();
     return;
   }
 
