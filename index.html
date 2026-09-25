@@ -7,6 +7,11 @@
   <meta name="description" content="Portfolio profesional de pasantía en Bayer Argentina - Project Management, Automatización de Procesos e Ingeniería Industrial.">
   <meta name="theme-color" content="#10A342">
 
+  <!-- Favicon / Ícono de la pestaña del navegador -->
+  <link rel="icon" type="image/png" href="Media/Logo bayer.png">
+  <link rel="shortcut icon" type="image/png" href="Media/Logo bayer.png">
+  <link rel="apple-touch-icon" href="Media/Logo bayer.png">
+
   <!-- Fuente Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,53 +27,56 @@
     <!-- HEADER / LOGO BAYER -->
     <header class="site-header">
       <div class="header-container">
-        <!-- Logo oficial vectorial de Bayer -->
-        <div class="bayer-cross-logo" aria-label="Logo Bayer">
-          <svg viewBox="0 0 100 100" width="36" height="36" fill="none">
-            <circle cx="50" cy="50" r="46" stroke="#10A342" stroke-width="6" />
-            <line x1="50" y1="18" x2="50" y2="82" stroke="#10A342" stroke-width="6" stroke-linecap="round" />
-            <line x1="18" y1="50" x2="82" y2="50" stroke="#10A342" stroke-width="6" stroke-linecap="round" />
-            <!-- Letras B-A-Y-E-R sutiles -->
-            <circle cx="50" cy="50" r="10" fill="#1A1A2E" />
-          </svg>
+        <div class="header-left">
+          <!-- Logo oficial de Bayer -->
+          <div class="bayer-cross-logo" aria-label="Logo Bayer">
+            <img src="Media/Logo bayer.png" alt="Logo Bayer" class="bayer-logo-img">
+          </div>
+          <div class="header-meta">
+            <span class="header-brand">Bayer Argentina</span>
+            <span class="header-badge">Science Fair 2026</span>
+          </div>
         </div>
-        <div class="header-meta">
-          <span class="header-brand">Bayer Argentina</span>
-          <span class="header-badge">Science Fair 2026</span>
-        </div>
+
+        <nav class="header-nav">
+          <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+          <a href="#proyectos" class="nav-link">Proyectos</a>
+          <a href="#habilidades" class="nav-link">Habilidades</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
       </div>
     </header>
 
     <!-- 1. HERO SECTION -->
     <section class="hero-section">
-      <div class="avatar-wrapper">
-        <div class="avatar-ring">
-          <!-- Si tenés imagen de perfil podés reemplazar avatar.png; tiene fallback automático con iniciales -->
-          <img src="avatar.jpg" alt="Juan Bautista García Thixton" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="avatar-fallback">JGT</div>
+      <div class="hero-content">
+        <div class="avatar-wrapper" onclick="openPhotoModal()" title="Clic para ver foto completa" style="cursor: pointer;">
+          <div class="avatar-ring">
+            <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton" class="avatar-img" onerror="this.onerror=null; this.src='1000728779.jpg';">
+            <div class="avatar-fallback">JGT</div>
+          </div>
         </div>
-        <div class="nfc-live-badge" title="Accedido por NFC">
-          <span class="nfc-dot"></span> NFC
+
+        <div class="hero-details">
+          <h1 class="hero-name">Juan Bautista García Thixton</h1>
+          <p class="hero-title">Pasante de Ingeniería Industrial | Pasante en Project Management Crop Protection</p>
+          <p class="hero-period">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            2025 – 2027
+          </p>
+
+          <div class="tagline-box">
+            <p class="hero-tagline">“De la pasantía al escenario global: automatización, procesos y presencia.”</p>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#proyectos" class="btn btn-primary">
+              <span>Ver mis proyectos</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <a href="#contacto" class="btn btn-outline">Contacto</a>
+          </div>
         </div>
-      </div>
-
-      <h1 class="hero-name">Juan Bautista García Thixton</h1>
-      <p class="hero-title">Pasante de Ingeniería Industrial | Pasante en Project Management Crop Protection</p>
-      <p class="hero-period">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        2025 – 2027
-      </p>
-
-      <div class="tagline-box">
-        <p class="hero-tagline">“De la pasantía al escenario global: automatización, procesos y presencia.”</p>
-      </div>
-
-      <div class="hero-actions">
-        <a href="#proyectos" class="btn btn-primary">
-          <span>Ver mis proyectos</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </a>
-        <a href="#contacto" class="btn btn-outline">Contacto</a>
       </div>
     </section>
 
@@ -93,7 +101,7 @@
       <div class="projects-list">
 
         <!-- PROYECTO 1 -->
-        <article class="project-card">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Automatización BORA">
           <div class="card-header">
             <span class="project-num">01 · Origen</span>
             <span class="project-area">Regulatory Affairs · Cono Sur</span>
@@ -107,10 +115,14 @@
           <p class="project-desc">
             Diseñé e implementé un flujo automatizado con n8n para el monitoreo y reporte del Boletín Oficial de la República Argentina (BORA), eliminando un proceso manual de frecuencia diaria/semanal. El sistema detecta publicaciones relevantes para el área regulatoria y genera reportes automáticos sin intervención humana, liberando tiempo del equipo para tareas de mayor valor.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
         <!-- PROYECTO 2 -->
-        <article class="project-card">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Extrapolación ITCC">
           <div class="card-header">
             <span class="project-num">02 · Escalabilidad</span>
             <span class="project-area">ITCC · Comercio Exterior</span>
@@ -124,10 +136,14 @@
           <p class="project-desc">
             A raíz del impacto del flujo regulatorio, el equipo de ITCC solicitó adaptar la solución para el monitoreo de publicaciones aduaneras. Extendí la arquitectura original para cubrir un nuevo dominio de negocio, demostrando la escalabilidad del desarrollo y consolidando n8n como herramienta de automatización en la organización.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
         <!-- PROYECTO 3 -->
-        <article class="project-card">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Automatización Planner">
           <div class="card-header">
             <span class="project-num">03 · Validación Cruzada</span>
             <span class="project-area">Accounting & Finance</span>
@@ -141,10 +157,14 @@
           <p class="project-desc">
             Desarrollé un flujo automatizado para el área de Accounting que genera tareas en Microsoft Planner de forma dinámica según el calendario mensual y los Working Days (WD) específicos de cada período. El sistema elimina la carga manual de planificación recurrente, asegurando que cada tarea aparezca en el momento correcto del ciclo financiero sin intervención del equipo.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
         <!-- PROYECTO 4 -->
-        <article class="project-card highlight-card">
+        <article class="project-card highlight-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Show & Tell Global">
           <div class="card-header">
             <span class="project-num badge-award">04 · Reconocimiento Global</span>
             <span class="project-area">Global Tech Community · Bayer Global</span>
@@ -158,10 +178,14 @@
           <p class="project-desc">
             Fui seleccionado para presentar mi desarrollo de automatización ante la comunidad global de Bayer interesada en n8n. La sesión, de formato "Show & Tell", tiene como objetivo compartir el caso de uso local como referencia para otras regiones, posicionando la solución de Cono Sur como modelo replicable a nivel internacional.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
         <!-- PROYECTO 5 -->
-        <article class="project-card">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Migración Plataforma">
           <div class="card-header">
             <span class="project-num">05 · Gestión & Volumen</span>
             <span class="project-area">PMO · Gestión de Proyectos</span>
@@ -175,10 +199,14 @@
           <p class="project-desc">
             Participé activamente en la preparación y ejecución de la migración hacia una nueva plataforma de seguimiento de proyectos. Me encargué del testing funcional y la adaptación de más de 150 proyectos al nuevo entorno, asegurando continuidad operativa y consistencia de datos durante el proceso de transición.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
         <!-- PROYECTO 6 -->
-        <article class="project-card">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Voces en Acción">
           <div class="card-header">
             <span class="project-num">06 · Cultura & Embajador</span>
             <span class="project-area">Comunicación Corporativa · Employer Branding</span>
@@ -189,9 +217,16 @@
             <span class="tag tag-gray">Marca</span>
             <span class="tag tag-gray">Redes Sociales</span>
           </div>
+          <div class="project-media-thumb">
+            <img src="Media/IMG-20260316-WA0033.jpg" alt="Equipo Bayer en ExpoAgro - Si es Agro es Bayer" class="project-thumb-img" loading="lazy">
+          </div>
           <p class="project-desc">
             Seleccionado para participar en el programa interno <em>Voces en Acción</em>, actuando como embajador de Bayer en redes sociales. Representé la cultura y los valores de la compañía desde la perspectiva de un pasante, contribuyendo a la estrategia de employer branding y presencia digital de Bayer Argentina.
           </p>
+          <div class="card-action-hint">
+            <span>Ver caso completo</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
         </article>
 
       </div>
@@ -201,54 +236,56 @@
     <section class="section skills-section" id="habilidades">
       <h2 class="section-title">Habilidades & Herramientas</h2>
       
-      <div class="skills-block">
-        <h3 class="skills-category-title">Herramientas & Tecnologías</h3>
-        <div class="skills-grid">
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            <strong>n8n</strong> (Workflow Automation)
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            <strong>Python</strong> & Web Scraping
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            <strong>Microsoft 365</strong> (Planner, Excel, Teams)
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            <strong>APIs REST</strong> & Integraciones
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            <strong>Plataformas PMO</strong> Corporativas
+      <div class="skills-container">
+        <div class="skills-block">
+          <h3 class="skills-category-title">Herramientas & Tecnologías</h3>
+          <div class="skills-grid">
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              <strong>n8n</strong> (Workflow Automation)
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              <strong>Python</strong> & Web Scraping
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              <strong>Microsoft 365</strong> (Planner, Excel, Teams)
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              <strong>APIs REST</strong> & Integraciones
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              <strong>Plataformas PMO</strong> Corporativas
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="skills-block">
-        <h3 class="skills-category-title">Metodologías & Enfoque</h3>
-        <div class="skills-grid">
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            Project Management & Metodologías Ágiles
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            Optimización de Procesos (Lean / Mejora Continua)
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            Testing Funcional & Migraciones de Datos
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            Gestión del Cambio & Soporte a Usuarios
-          </div>
-          <div class="skill-pill">
-            <span class="skill-bullet"></span>
-            Comunicación con Stakeholders Locales y Globales
+        <div class="skills-block">
+          <h3 class="skills-category-title">Metodologías & Enfoque</h3>
+          <div class="skills-grid">
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              Project Management & Metodologías Ágiles
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              Optimización de Procesos (Lean / Mejora Continua)
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              Testing Funcional & Migraciones de Datos
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              Gestión del Cambio & Soporte a Usuarios
+            </div>
+            <div class="skill-pill">
+              <span class="skill-bullet"></span>
+              Comunicación con Stakeholders Locales y Globales
+            </div>
           </div>
         </div>
       </div>
@@ -259,44 +296,50 @@
       <h2 class="section-title">Contacto</h2>
       
       <div class="contact-box">
-        <p class="contact-closing">
-          Gracias por tu tiempo e interés. Quedo 100% disponible para seguir la conversación y explorar cómo sumar valor a tu equipo.
-        </p>
+        <div class="contact-grid">
+          <div class="contact-info-col">
+            <p class="contact-closing">
+              Gracias por tu tiempo e interés. Quedo 100% disponible para seguir la conversación y explorar cómo sumar valor a tu equipo.
+            </p>
 
-        <!-- Acciones directas de contacto -->
-        <div class="contact-actions">
-          <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer" class="btn btn-contact-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
-            <span>LinkedIn</span>
-          </a>
+            <!-- Acciones directas de contacto -->
+            <div class="contact-actions">
+              <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer" class="btn btn-contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+                <span>LinkedIn</span>
+              </a>
 
-          <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer" class="btn btn-contact-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span>juanba2604@gmail.com</span>
-          </a>
-        </div>
-
-        <!-- Descargas de CV -->
-        <div class="cv-downloads-wrapper">
-          <span class="cv-label">Descargar Curriculum Vitae:</span>
-          <div class="cv-buttons">
-            <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>CV en Español (PDF)</span>
-            </a>
-            <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>CV in English (PDF)</span>
-            </a>
+              <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer" class="btn btn-contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>juanba2604@gmail.com</span>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <!-- Botón Guardar en Contactos (.vcf) para celular -->
-        <div class="vcf-wrapper">
-          <button class="btn btn-vcf" onclick="downloadVCard()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            <span>Guardar contacto directo en tu teléfono</span>
-          </button>
+          <div class="contact-downloads-col">
+            <!-- Descargas de CV -->
+            <div class="cv-downloads-wrapper">
+              <span class="cv-label">Descargar Curriculum Vitae:</span>
+              <div class="cv-buttons">
+                <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>CV en Español (PDF)</span>
+                </a>
+                <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>CV in English (PDF)</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Botón Guardar en Contactos (.vcf) para celular -->
+            <div class="vcf-wrapper">
+              <button class="btn btn-vcf" onclick="downloadVCard()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                <span>Guardar contacto directo en tu teléfono</span>
+              </button>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -308,6 +351,49 @@
       <p class="footer-sub">Stand de Pasantías · Science Fair</p>
     </footer>
 
+  </div>
+
+  <!-- Modal para ver foto completa -->
+  <div class="photo-modal-backdrop" id="photoModal" onclick="closePhotoModal()">
+    <div class="photo-modal-content" onclick="event.stopPropagation()">
+      <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Cerrar">&times;</button>
+      <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton con el logo de Bayer" class="full-photo-img" onerror="this.onerror=null; this.src='1000728779.jpg';">
+      <div class="photo-modal-footer">
+        <span class="photo-caption-title">Juan Bautista García Thixton</span>
+        <span class="photo-caption-sub">Bayer Argentina · Pasantía 2025–2027</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Detallado de Proyecto -->
+  <div class="project-modal-backdrop" id="projectModal" onclick="closeProjectModal()">
+    <div class="project-modal-content" onclick="event.stopPropagation()">
+      <div class="project-modal-header">
+        <div class="project-modal-meta">
+          <span class="modal-project-num" id="modalProjectNum">01 · Origen</span>
+          <span class="modal-project-area" id="modalProjectArea">Regulatory Affairs · Cono Sur</span>
+        </div>
+        <button class="project-modal-close" onclick="closeProjectModal()" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="project-modal-body">
+        <h3 class="modal-project-title" id="modalProjectTitle">Título del Proyecto</h3>
+        <div class="modal-project-tags" id="modalProjectTags"></div>
+        <div class="modal-project-media" id="modalProjectMedia" style="display: none;">
+          <img src="" alt="" id="modalProjectImg" class="modal-media-img">
+        </div>
+        <div class="modal-project-desc-wrapper">
+          <h4 class="modal-desc-heading">Detalle & Impacto:</h4>
+          <p class="modal-project-desc" id="modalProjectDesc"></p>
+        </div>
+      </div>
+      <div class="project-modal-footer">
+        <button class="btn btn-outline" onclick="closeProjectModal()">Cerrar</button>
+        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()">
+          <span>Conversar sobre esto</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
