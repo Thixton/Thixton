@@ -5,17 +5,18 @@
    ========================================================================== */
 
 :root {
-  /* Colores oficiales y base */
-  --bayer-green: #10A342;
-  --bayer-green-hover: #0d8a37;
-  --bayer-green-light: #E8F8EE;
-  --bayer-green-border: #bbf0cc;
+  /* Colores oficiales y base - Optimizados para ratio WCAG AA ≥ 4.5:1 */
+  --bayer-green: #0C8539;
+  --bayer-green-hover: #086629;
+  --bayer-green-dark: #075E26;
+  --bayer-green-light: #EBF7EE;
+  --bayer-green-border: #B7E7C4;
   
-  --dark-navy: #1A1A2E;
-  --dark-slate: #2E2E48;
-  --text-main: #1A1A2E;
-  --text-muted: #555770;
-  --text-subtle: #797B96;
+  --dark-navy: #141424;
+  --dark-slate: #24243B;
+  --text-main: #141424;
+  --text-muted: #484A60;
+  --text-subtle: #52546A;
   
   --bg-page: #F4F6F8;
   --bg-card: #FFFFFF;
@@ -27,9 +28,9 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
   /* Sombras */
-  --shadow-sm: 0 1px 3px rgba(26, 26, 46, 0.05);
-  --shadow-card: 0 2px 8px rgba(26, 26, 46, 0.06);
-  --shadow-hover: 0 8px 20px rgba(26, 26, 46, 0.09);
+  --shadow-sm: 0 1px 3px rgba(20, 20, 36, 0.05);
+  --shadow-card: 0 2px 8px rgba(20, 20, 36, 0.06);
+  --shadow-hover: 0 8px 20px rgba(20, 20, 36, 0.09);
 
   /* Bordes y radios */
   --radius-sm: 6px;
@@ -69,6 +70,41 @@ body {
   color: #FFFFFF;
 }
 
+/* Scrollbar personalizada corporativa */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Indicador global de foco accesible */
+:focus-visible {
+  outline: 2px solid var(--bayer-green);
+  outline-offset: 3px;
+}
+
+/* Balance tipográfico moderno */
+h1, h2, h3, .project-title, .hero-name {
+  text-wrap: balance;
+}
+
+/* Números tabulares alineados para fechas y métricas */
+.project-num, .hero-period, .badge-award {
+  font-variant-numeric: tabular-nums;
+}
+
 /* Contenedor central (Mobile-First de 0 a 767px) */
 .site-wrapper {
   width: 100%;
@@ -77,7 +113,6 @@ body {
   background-color: var(--bg-card);
   min-height: 100vh;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
-  transition: max-width var(--trans-fast);
 }
 
 /* ==========================================================================
@@ -118,11 +153,11 @@ body {
   object-fit: contain;
   border-radius: 50%;
   display: block;
-  transition: transform var(--trans-fast);
+  transition: filter var(--trans-fast);
 }
 
 .bayer-logo-img:hover {
-  transform: scale(1.08);
+  filter: drop-shadow(0 2px 6px rgba(12, 133, 57, 0.3));
 }
 
 .header-meta {
@@ -140,7 +175,7 @@ body {
 .header-badge {
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--bayer-green);
+  color: var(--bayer-green-dark);
   background-color: var(--bayer-green-light);
   padding: 3px 8px;
   border-radius: var(--radius-pill);
@@ -300,9 +335,9 @@ body {
 
 .tagline-box {
   background-color: var(--bayer-green-light);
-  border-left: 3px solid var(--bayer-green);
-  padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border: 1px solid var(--bayer-green-border);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
   margin: 0 auto 20px;
   text-align: left;
 }
@@ -363,12 +398,28 @@ body {
 }
 
 /* ==========================================================================
-   Estructura de Secciones
+   Estructura de Secciones & Optimización de Renderizado
    ========================================================================== */
 
 .section {
   padding: 28px 20px;
   border-bottom: 1px solid var(--border-light);
+}
+
+/* Content-visibility para reducir el costo de pintura y parsing inicial en mobile */
+.projects-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 1100px;
+}
+
+.skills-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
+}
+
+.contact-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 550px;
 }
 
 .section-header {
@@ -394,7 +445,7 @@ body {
 .projects-count {
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--bayer-green);
+  color: var(--bayer-green-dark);
   background-color: var(--bayer-green-light);
   padding: 3px 8px;
   border-radius: var(--radius-pill);
@@ -456,11 +507,15 @@ body {
   gap: 5px;
   font-size: 0.76rem;
   font-weight: 700;
-  color: var(--bayer-green);
+  color: var(--bayer-green-dark);
   margin-top: 14px;
   padding-top: 10px;
   border-top: 1px dashed var(--border-light);
   transition: gap var(--trans-fast), color var(--trans-fast);
+}
+
+.card-action-hint svg {
+  transition: transform var(--trans-fast);
 }
 
 .clickable-card:hover .card-action-hint {
@@ -468,8 +523,13 @@ body {
   color: var(--bayer-green-hover);
 }
 
+.clickable-card:hover .card-action-hint svg {
+  transform: translateX(3px);
+}
+
 .highlight-card {
-  border-left: 4px solid var(--bayer-green);
+  border-color: var(--bayer-green-border);
+  box-shadow: 0 0 0 1px var(--bayer-green-border), var(--shadow-card);
 }
 
 .card-header {
@@ -483,7 +543,7 @@ body {
 .project-num {
   font-size: 0.74rem;
   font-weight: 700;
-  color: var(--bayer-green);
+  color: var(--bayer-green-dark);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -491,6 +551,7 @@ body {
 .badge-award {
   color: #065f46;
   background-color: var(--bayer-green-light);
+  border: 1px solid var(--bayer-green-border);
   padding: 2px 7px;
   border-radius: var(--radius-sm);
 }
@@ -526,7 +587,7 @@ body {
 
 .tag-green {
   background-color: var(--bayer-green-light);
-  color: var(--bayer-green);
+  color: var(--bayer-green-dark);
   border: 1px solid var(--bayer-green-border);
 }
 
@@ -695,9 +756,12 @@ body {
 }
 
 .cv-downloads-wrapper {
-  border-top: 1px solid var(--border-light);
-  padding-top: 18px;
-  margin-bottom: 14px;
+  margin-top: 18px;
+  padding: 16px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
 }
 
 .cv-label {
@@ -707,7 +771,7 @@ body {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .cv-buttons {
@@ -1216,9 +1280,8 @@ body {
 .modal-project-desc-wrapper {
   background-color: var(--bg-subtle);
   border: 1px solid var(--border-light);
-  border-left: 3px solid var(--bayer-green);
-  border-radius: var(--radius-sm);
-  padding: 16px;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
 }
 
 .modal-desc-heading {
@@ -1245,4 +1308,72 @@ body {
   background-color: #FFFFFF;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Hardening & Resiliencia Visual
+   ========================================================================== */
+
+/* Enlace accesible de salto al contenido */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  background-color: var(--dark-navy);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  z-index: 99999;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: top var(--trans-fast);
+}
+
+.skip-link:focus {
+  top: 12px;
+  outline: 2px solid var(--bayer-green);
+}
+
+/* Prevención de desbordamiento de texto en pantallas ultra estrechas */
+.site-wrapper, .project-card, .about-card, .hero-content, .hero-details {
+  min-width: 0;
+}
+
+.project-title, .hero-name, .hero-title, .about-text, .project-desc, .modal-project-desc {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Preferencias de accesibilidad: Movimiento Reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Estilos de impresión para formato dossier / evaluación offline */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .site-header, .hero-actions, .card-action-hint, .contact-actions, .vcf-wrapper, .photo-modal-backdrop, .project-modal-backdrop, .skip-link {
+    display: none !important;
+  }
+  .site-wrapper {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .project-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #D1D5DB !important;
+    margin-bottom: 16px !important;
+  }
 }

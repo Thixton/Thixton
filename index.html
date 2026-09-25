@@ -12,6 +12,17 @@
   <link rel="shortcut icon" type="image/png" href="Media/Logo bayer.png">
   <link rel="apple-touch-icon" href="Media/Logo bayer.png">
 
+  <!-- PWA & Mobile Web App Hardening -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bayer Portfolio">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Preload de recursos críticos above-the-fold -->
+  <link rel="preload" as="image" href="Media/Logo bayer.png">
+  <link rel="preload" as="image" href="Media/1000728779.jpg" fetchpriority="high">
+
   <!-- Fuente Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +31,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Enlace accesible de salto al contenido -->
+  <a href="#sobre-mi" class="skip-link">Saltar al contenido principal</a>
 
   <!-- Contenedor Principal (Mobile-First) -->
   <div class="site-wrapper">
@@ -30,7 +43,7 @@
         <div class="header-left">
           <!-- Logo oficial de Bayer -->
           <div class="bayer-cross-logo" aria-label="Logo Bayer">
-            <img src="Media/Logo bayer.png" alt="Logo Bayer" class="bayer-logo-img">
+            <img src="Media/Logo bayer.png" alt="Logo Bayer" class="bayer-logo-img" width="38" height="38" fetchpriority="high" decoding="sync">
           </div>
           <div class="header-meta">
             <span class="header-brand">Bayer Argentina</span>
@@ -52,17 +65,17 @@
       <div class="hero-content">
         <div class="avatar-wrapper" onclick="openPhotoModal()" title="Clic para ver foto completa" style="cursor: pointer;">
           <div class="avatar-ring">
-            <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton" class="avatar-img" onerror="this.onerror=null; this.src='1000728779.jpg';">
+            <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton" class="avatar-img" width="130" height="130" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.src='1000728779.jpg';">
             <div class="avatar-fallback">JGT</div>
           </div>
         </div>
 
         <div class="hero-details">
           <h1 class="hero-name">Juan Bautista García Thixton</h1>
-          <p class="hero-title">Pasante de Ingeniería Industrial | Pasante en Project Management Crop Protection</p>
+          <p class="hero-title">Pasante de Ingeniería Industrial | Project Management Crop Protection</p>
           <p class="hero-period">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            2025 – 2027
+            Pasantía: 2025 – 2027
           </p>
 
           <div class="tagline-box">
@@ -70,11 +83,11 @@
           </div>
 
           <div class="hero-actions">
-            <a href="#proyectos" class="btn btn-primary">
-              <span>Ver mis proyectos</span>
+            <a href="#proyectos" class="btn btn-primary" aria-label="Explorar proyectos destacados de la pasantía">
+              <span>Explorar proyectos clave</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </a>
-            <a href="#contacto" class="btn btn-outline">Contacto</a>
+            <a href="#contacto" class="btn btn-outline" aria-label="Ir a la sección de contacto y descargas">Ir a Contacto</a>
           </div>
         </div>
       </div>
@@ -218,7 +231,7 @@
             <span class="tag tag-gray">Redes Sociales</span>
           </div>
           <div class="project-media-thumb">
-            <img src="Media/IMG-20260316-WA0033.jpg" alt="Equipo Bayer en ExpoAgro - Si es Agro es Bayer" class="project-thumb-img" loading="lazy">
+            <img src="Media/IMG-20260316-WA0033.jpg" alt="Equipo Bayer en ExpoAgro - Si es Agro es Bayer" class="project-thumb-img" width="600" height="450" loading="lazy" onerror="this.onerror=null; this.src='IMG-20260316-WA0033.jpg';">
           </div>
           <p class="project-desc">
             Seleccionado para participar en el programa interno <em>Voces en Acción</em>, actuando como embajador de Bayer en redes sociales. Representé la cultura y los valores de la compañía desde la perspectiva de un pasante, contribuyendo a la estrategia de employer branding y presencia digital de Bayer Argentina.
@@ -304,45 +317,43 @@
 
             <!-- Acciones directas de contacto -->
             <div class="contact-actions">
-              <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer" class="btn btn-contact-item">
+              <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer" class="btn btn-contact-item" aria-label="Visitar perfil profesional en LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
-                <span>LinkedIn</span>
+                <span>LinkedIn · Perfil profesional</span>
               </a>
 
               <!-- Botón WhatsApp anti-crawlers (número generado dinámicamente en JS) -->
-              <button type="button" class="btn btn-contact-item btn-contact-wa" onclick="openWhatsAppChat()" title="Iniciar conversación directa por WhatsApp">
+              <button type="button" class="btn btn-contact-item btn-contact-wa" onclick="openWhatsAppChat()" title="Iniciar conversación directa por WhatsApp" aria-label="Abrir conversación directa por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24l-.18.01zm-3.52 3.63c-.19 0-.42.07-.64.31-.22.25-.85.83-.85 2.02s.87 2.34 1 2.51c.12.17 1.7 2.6 4.12 3.65.58.25 1.02.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.17-.47-.29-.25-.12-1.44-.71-1.66-.79-.22-.09-.39-.13-.55.13-.17.25-.64.79-.79.95-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42l-.48-.01z"/></svg>
-                <span>WhatsApp (Chat directo)</span>
+                <span>WhatsApp · Conversación directa</span>
               </button>
 
-              <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer" class="btn btn-contact-item">
+              <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer" class="btn btn-contact-item" aria-label="Enviar correo electrónico a juanba2604@gmail.com">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>juanba2604@gmail.com</span>
+                <span>Email · juanba2604@gmail.com</span>
               </a>
             </div>
           </div>
 
           <div class="contact-downloads-col">
             <!-- Descargas de CV -->
-            <div class="cv-downloads-wrapper">
-              <span class="cv-label">Descargar Curriculum Vitae:</span>
-              <div class="cv-buttons">
-                <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  <span>CV en Español (PDF)</span>
-                </a>
-                <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  <span>CV in English (PDF)</span>
-                </a>
-              </div>
+            <span class="cv-label">Curriculum Vitae:</span>
+            <div class="cv-buttons">
+              <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv" aria-label="Descargar Curriculum Vitae en Español formato PDF">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Descargar CV en Español (PDF · 1 Pág.)</span>
+              </a>
+              <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv" aria-label="Download Curriculum Vitae in English PDF format">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download CV in English (PDF · 1 Page)</span>
+              </a>
             </div>
 
             <!-- Botón Guardar en Contactos (.vcf) para celular -->
             <div class="vcf-wrapper">
-              <button class="btn btn-vcf" onclick="downloadVCard()">
+              <button class="btn btn-vcf" onclick="downloadVCard()" aria-label="Guardar contacto en la agenda del teléfono en formato vCard">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                <span>Guardar contacto directo en tu teléfono</span>
+                <span>Guardar contacto en tu teléfono (.vcf)</span>
               </button>
             </div>
           </div>
@@ -360,47 +371,50 @@
   </div>
 
   <!-- Modal para ver foto completa -->
-  <div class="photo-modal-backdrop" id="photoModal" onclick="closePhotoModal()">
+  <div class="photo-modal-backdrop" id="photoModal" onclick="closePhotoModal()" role="dialog" aria-modal="true" aria-labelledby="photoCaptionTitle">
     <div class="photo-modal-content" onclick="event.stopPropagation()">
-      <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Cerrar">&times;</button>
-      <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton con el logo de Bayer" class="full-photo-img" onerror="this.onerror=null; this.src='1000728779.jpg';">
+      <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Cerrar vista de fotografía">&times;</button>
+      <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton con el logo de Bayer" class="full-photo-img" width="480" height="640" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='1000728779.jpg';">
       <div class="photo-modal-footer">
-        <span class="photo-caption-title">Juan Bautista García Thixton</span>
+        <span class="photo-caption-title" id="photoCaptionTitle">Juan Bautista García Thixton</span>
         <span class="photo-caption-sub">Bayer Argentina · Pasantía 2025–2027</span>
       </div>
     </div>
   </div>
 
   <!-- Modal Detallado de Proyecto -->
-  <div class="project-modal-backdrop" id="projectModal" onclick="closeProjectModal()">
+  <div class="project-modal-backdrop" id="projectModal" onclick="closeProjectModal()" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
     <div class="project-modal-content" onclick="event.stopPropagation()">
       <div class="project-modal-header">
         <div class="project-modal-meta">
           <span class="modal-project-num" id="modalProjectNum">01 · Origen</span>
           <span class="modal-project-area" id="modalProjectArea">Regulatory Affairs · Cono Sur</span>
         </div>
-        <button class="project-modal-close" onclick="closeProjectModal()" aria-label="Cerrar">&times;</button>
+        <button class="project-modal-close" onclick="closeProjectModal()" aria-label="Cerrar modal de proyecto">&times;</button>
       </div>
       <div class="project-modal-body">
         <h3 class="modal-project-title" id="modalProjectTitle">Título del Proyecto</h3>
         <div class="modal-project-tags" id="modalProjectTags"></div>
         <div class="modal-project-media" id="modalProjectMedia" style="display: none;">
-          <img src="" alt="" id="modalProjectImg" class="modal-media-img">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Fotografía del proyecto" id="modalProjectImg" class="modal-media-img">
         </div>
         <div class="modal-project-desc-wrapper">
-          <h4 class="modal-desc-heading">Detalle & Impacto:</h4>
+          <h4 class="modal-desc-heading">Alcance e Impacto del Proyecto:</h4>
           <p class="modal-project-desc" id="modalProjectDesc"></p>
         </div>
       </div>
       <div class="project-modal-footer">
         <button class="btn btn-outline" onclick="closeProjectModal()">Cerrar</button>
-        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()">
-          <span>Conversar sobre esto</span>
+        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()" aria-label="Contactar sobre este proyecto">
+          <span>Consultar por este proyecto</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </a>
       </div>
     </div>
   </div>
+
+  <!-- Live region accesible para notificaciones de estado -->
+  <div id="appToast" aria-live="polite" role="status"></div>
 
   <script src="app.js"></script>
 </body>
