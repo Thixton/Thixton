@@ -89,24 +89,105 @@ function showToast(message) {
 }
 
 /**
+ * Galería de fotos del perfil (accesible al abrir el popup)
+ */
+const profileGallery = [
+  {
+    src: 'Media/1000728779.jpg',
+    fallback: '1000728779.jpg',
+    title: 'Juan Bautista García Thixton',
+    sub: 'Bayer Argentina · Pasantía 2025–2027',
+    alt: 'Juan Bautista García Thixton con el logo de Bayer'
+  },
+  {
+    src: 'Media/IMG-20260310-WA0072.jpg',
+    fallback: 'IMG-20260310-WA0072.jpg',
+    title: 'Presencia en ExpoAgro',
+    sub: 'Bayer Argentina · Si es Agro, es Bayer',
+    alt: 'Juan Bautista García Thixton en ExpoAgro con Bayer'
+  },
+  {
+    src: 'Media/IMG-20260310-WA0143.jpg',
+    fallback: 'IMG-20260310-WA0143.jpg',
+    title: 'Equipo y Comunidad Técnica',
+    sub: 'Bayer Argentina · Crop Protection',
+    alt: 'Equipo de pasantes y profesionales de Bayer'
+  }
+];
+
+let currentGalleryIndex = 0;
+
+function renderGalleryPhoto(index, transition = false) {
+  if (index < 0) index = profileGallery.length - 1;
+  if (index >= profileGallery.length) index = 0;
+  currentGalleryIndex = index;
+
+  const item = profileGallery[currentGalleryIndex];
+  const img = document.getElementById('galleryMainImg');
+  const capTitle = document.getElementById('photoCaptionTitle');
+  const capSub = document.getElementById('photoCaptionSub');
+  const counter = document.getElementById('galleryCounter');
+  const dots = document.querySelectorAll('.gallery-dot');
+
+  if (transition && img) {
+    img.style.opacity = '0.35';
+    img.style.transform = 'scale(0.97)';
+    setTimeout(() => {
+      img.src = item.src;
+      img.alt = item.alt;
+      img.onerror = () => { img.onerror = null; img.src = item.fallback; };
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    }, 120);
+  } else if (img) {
+    img.src = item.src;
+    img.alt = item.alt;
+    img.onerror = () => { img.onerror = null; img.src = item.fallback; };
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }
+
+  if (capTitle) capTitle.textContent = item.title;
+  if (capSub) capSub.textContent = item.sub;
+  if (counter) counter.textContent = `${currentGalleryIndex + 1} / ${profileGallery.length}`;
+
+  dots.forEach((dot, i) => {
+    const isActive = i === currentGalleryIndex;
+    if (isActive) {
+      dot.classList.add('active');
+      dot.setAttribute('aria-selected', 'true');
+    } else {
+      dot.classList.remove('active');
+      dot.setAttribute('aria-selected', 'false');
+    }
+  });
+}
+
+function nextGalleryPhoto() {
+  renderGalleryPhoto(currentGalleryIndex + 1, true);
+}
+
+function prevGalleryPhoto() {
+  renderGalleryPhoto(currentGalleryIndex - 1, true);
+}
+
+function goToGalleryPhoto(index) {
+  renderGalleryPhoto(index, true);
+}
+
+/**
  * Control del Modal de Foto Completa con sincronización de historial y focus trap
  */
-function openPhotoModal(src = 'Media/1000728779.jpg', title = 'Juan Bautista García Thixton', sub = 'Bayer Argentina · Pasantía 2025–2027') {
+function openPhotoModal(index = 0) {
   lastFocusedTrigger = document.activeElement;
   const modal = document.getElementById('photoModal');
   if (modal) {
-    const img = modal.querySelector('.full-photo-img');
-    const capTitle = modal.querySelector('.photo-caption-title');
-    const capSub = modal.querySelector('.photo-caption-sub');
-    const closeBtn = modal.querySelector('.photo-modal-close');
-
-    if (img) img.src = src;
-    if (capTitle) capTitle.textContent = title;
-    if (capSub) capSub.textContent = sub;
+    renderGalleryPhoto(index, false);
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    const closeBtn = modal.querySelector('.photo-modal-close');
     if (closeBtn) closeBtn.focus();
 
     if (!history.state || history.state.modal !== 'photo') {
@@ -232,11 +313,52 @@ document.addEventListener('keydown', (e) => {
       e.preventDefault();
       first.focus();
     }
+    return;
+  }
+
+  // Navegación por teclado dentro de la galería (flechas izquierda / derecha)
+  const photoModal = document.getElementById('photoModal');
+  if (photoModal && photoModal.classList.contains('open')) {
+    if (e.key === 'ArrowRight') {
+      nextGalleryPhoto();
+    } else if (e.key === 'ArrowLeft') {
+      prevGalleryPhoto();
+    }
   }
 });
 
-// Soporte de accesibilidad para presionar Enter o Barra espaciadora en las cards
+// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para la galería
+let touchStartX = 0;
+let touchStartY = 0;
+
+function setupGalleryTouchGestures() {
+  const container = document.getElementById('photoSliderContainer');
+  if (!container) return;
+
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    const diffX = e.changedTouches[0].clientX - touchStartX;
+    const diffY = e.changedTouches[0].clientY - touchStartY;
+
+    // Si el gesto es horizontal y supera 40px de umbral
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX < 0) {
+        nextGalleryPhoto(); // Deslizar hacia la izquierda avanza
+      } else {
+        prevGalleryPhoto(); // Deslizar hacia la derecha retrocede
+      }
+    }
+  }, { passive: true });
+}
+
+// Inicialización de accesibilidad y eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
+  setupGalleryTouchGestures();
+
   const clickableCards = document.querySelectorAll('.clickable-card');
   clickableCards.forEach(card => {
     card.addEventListener('keydown', (e) => {

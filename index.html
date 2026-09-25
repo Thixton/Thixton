@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Juan Bautista García Thixton | Portfolio de Pasantía Bayer</title>
-  <meta name="description" content="Portfolio profesional de pasantía en Bayer Argentina - Project Management, Automatización de Procesos e Ingeniería Industrial.">
+  <meta name="description"
+    content="Portfolio profesional de pasantía en Bayer Argentina - Project Management, Automatización de Procesos e Ingeniería Industrial.">
   <meta name="theme-color" content="#10A342">
 
   <!-- Favicon / Ícono de la pestaña del navegador -->
@@ -30,6 +32,7 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Enlace accesible de salto al contenido -->
   <a href="#sobre-mi" class="skip-link">Saltar al contenido principal</a>
@@ -43,7 +46,8 @@
         <div class="header-left">
           <!-- Logo oficial de Bayer -->
           <div class="bayer-cross-logo" aria-label="Logo Bayer">
-            <img src="Media/Logo bayer.png" alt="Logo Bayer" class="bayer-logo-img" width="38" height="38" fetchpriority="high" decoding="sync">
+            <img src="Media/Logo bayer.png" alt="Logo Bayer" class="bayer-logo-img" width="38" height="38"
+              fetchpriority="high" decoding="sync">
           </div>
           <div class="header-meta">
             <span class="header-brand">Bayer Argentina</span>
@@ -63,18 +67,26 @@
     <!-- 1. HERO SECTION -->
     <section class="hero-section">
       <div class="hero-content">
-        <div class="avatar-wrapper" onclick="openPhotoModal()" title="Clic para ver foto completa" style="cursor: pointer;">
-          <div class="avatar-ring">
-            <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton" class="avatar-img" width="130" height="130" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.src='1000728779.jpg';">
-            <div class="avatar-fallback">JGT</div>
-          </div>
-        </div>
+        <button type="button" class="avatar-wrapper" onclick="openPhotoModal()"
+          title="Ver galería fotográfica del perfil" aria-label="Ver galería fotográfica de Juan Bautista García Thixton">
+          <span class="avatar-ring">
+            <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton" class="avatar-img" width="130"
+              height="130" fetchpriority="high" decoding="async"
+              onerror="this.onerror=null; this.src='1000728779.jpg';">
+            <span class="avatar-fallback">JGT</span>
+          </span>
+        </button>
 
         <div class="hero-details">
           <h1 class="hero-name">Juan Bautista García Thixton</h1>
-          <p class="hero-title">Pasante de Ingeniería Industrial | Project Management Crop Protection</p>
+          <p class="hero-title">Project Management Crop Protection | Estudiante de Ingeniería Industrial</p>
           <p class="hero-period">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
             Pasantía: 2025 – 2027
           </p>
 
@@ -85,9 +97,12 @@
           <div class="hero-actions">
             <a href="#proyectos" class="btn btn-primary" aria-label="Explorar proyectos destacados de la pasantía">
               <span>Explorar proyectos clave</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </a>
-            <a href="#contacto" class="btn btn-outline" aria-label="Ir a la sección de contacto y descargas">Ir a Contacto</a>
+            <a href="#contacto" class="btn btn-outline" aria-label="Ir a la sección de contacto y descargas">Ir a
+              Contacto</a>
           </div>
         </div>
       </div>
@@ -98,7 +113,11 @@
       <h2 class="section-title">Sobre mí</h2>
       <div class="about-card">
         <p class="about-text">
-          Estudiante avanzado de <strong>Ingeniería Industrial en la UTN</strong> y Pasante en <strong>Project Management para Crop Protection</strong> en Bayer. Combino el rigor analítico de procesos con la capacidad técnica de desarrollar automatizaciones ágiles (n8n, Python) y liderar la gestión del cambio. Mi enfoque: detectar ineficiencias operativas y convertirlas en soluciones robustas y escalables con impacto directo en el negocio.
+          Estudiante avanzado de <strong>Ingeniería Industrial en la UTN</strong> y Pasante en <strong>Project
+            Management para Crop Protection</strong> en Bayer. Combino el rigor analítico de procesos con la capacidad
+          técnica de desarrollar automatizaciones ágiles (n8n, Python) y liderar la gestión del cambio. Mi enfoque:
+          detectar ineficiencias operativas y convertirlas en soluciones robustas y escalables con impacto directo en el
+          negocio.
         </p>
       </div>
     </section>
@@ -109,12 +128,14 @@
         <h2 class="section-title">Proyectos Destacados</h2>
         <span class="projects-count">6 iniciativas</span>
       </div>
-      <p class="section-subtitle">Trayectoria narrativa: desde el primer desarrollo local hasta el alcance internacional.</p>
+      <p class="section-subtitle">Trayectoria narrativa: desde el primer desarrollo local hasta el alcance
+        internacional.</p>
 
       <div class="projects-list">
 
         <!-- PROYECTO 1 -->
-        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Automatización BORA">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button"
+          aria-label="Ver detalles de Automatización BORA">
           <div class="card-header">
             <span class="project-num">01 · Origen</span>
             <span class="project-area">Regulatory Affairs · Cono Sur</span>
@@ -126,16 +147,22 @@
             <span class="tag tag-gray">Regulatorio</span>
           </div>
           <p class="project-desc">
-            Diseñé e implementé un flujo automatizado con n8n para el monitoreo y reporte del Boletín Oficial de la República Argentina (BORA), eliminando un proceso manual de frecuencia diaria/semanal. El sistema detecta publicaciones relevantes para el área regulatoria y genera reportes automáticos sin intervención humana, liberando tiempo del equipo para tareas de mayor valor.
+            Diseñé e implementé un flujo automatizado con n8n para el monitoreo y reporte del Boletín Oficial de la
+            República Argentina (BORA), eliminando un proceso manual de frecuencia diaria/semanal. El sistema detecta
+            publicaciones relevantes para el área regulatoria y genera reportes automáticos sin intervención humana,
+            liberando tiempo del equipo para tareas de mayor valor.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
         <!-- PROYECTO 2 -->
-        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Extrapolación ITCC">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button"
+          aria-label="Ver detalles de Extrapolación ITCC">
           <div class="card-header">
             <span class="project-num">02 · Escalabilidad</span>
             <span class="project-area">ITCC · Comercio Exterior</span>
@@ -147,16 +174,22 @@
             <span class="tag tag-dark">n8n</span>
           </div>
           <p class="project-desc">
-            A raíz del impacto del flujo regulatorio, el equipo de ITCC solicitó adaptar la solución para el monitoreo de publicaciones aduaneras. Extendí la arquitectura original para cubrir un nuevo dominio de negocio, demostrando la escalabilidad del desarrollo y consolidando n8n como herramienta de automatización en la organización.
+            A raíz del impacto del flujo regulatorio, el equipo de ITCC solicitó adaptar la solución para el monitoreo
+            de publicaciones aduaneras. Extendí la arquitectura original para cubrir un nuevo dominio de negocio,
+            demostrando la escalabilidad del desarrollo y consolidando n8n como herramienta de automatización en la
+            organización.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
         <!-- PROYECTO 3 -->
-        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Automatización Planner">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button"
+          aria-label="Ver detalles de Automatización Planner">
           <div class="card-header">
             <span class="project-num">03 · Validación Cruzada</span>
             <span class="project-area">Accounting & Finance</span>
@@ -168,16 +201,22 @@
             <span class="tag tag-gray">Finanzas</span>
           </div>
           <p class="project-desc">
-            Desarrollé un flujo automatizado para el área de Accounting que genera tareas en Microsoft Planner de forma dinámica según el calendario mensual y los Working Days (WD) específicos de cada período. El sistema elimina la carga manual de planificación recurrente, asegurando que cada tarea aparezca en el momento correcto del ciclo financiero sin intervención del equipo.
+            Desarrollé un flujo automatizado para el área de Accounting que genera tareas en Microsoft Planner de forma
+            dinámica según el calendario mensual y los Working Days (WD) específicos de cada período. El sistema elimina
+            la carga manual de planificación recurrente, asegurando que cada tarea aparezca en el momento correcto del
+            ciclo financiero sin intervención del equipo.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
         <!-- PROYECTO 4 -->
-        <article class="project-card highlight-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Show & Tell Global">
+        <article class="project-card highlight-card clickable-card" onclick="openProjectModal(this)" tabindex="0"
+          role="button" aria-label="Ver detalles de Show & Tell Global">
           <div class="card-header">
             <span class="project-num badge-award">04 · Reconocimiento Global</span>
             <span class="project-area">Global Tech Community · Bayer Global</span>
@@ -189,16 +228,22 @@
             <span class="tag tag-green">Alcance Global</span>
           </div>
           <p class="project-desc">
-            Fui seleccionado para presentar mi desarrollo de automatización ante la comunidad global de Bayer interesada en n8n. La sesión, de formato "Show & Tell", tiene como objetivo compartir el caso de uso local como referencia para otras regiones, posicionando la solución de Cono Sur como modelo replicable a nivel internacional.
+            Fui seleccionado para presentar mi desarrollo de automatización ante la comunidad global de Bayer interesada
+            en n8n. La sesión, de formato "Show & Tell", tiene como objetivo compartir el caso de uso local como
+            referencia para otras regiones, posicionando la solución de Cono Sur como modelo replicable a nivel
+            internacional.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
         <!-- PROYECTO 5 -->
-        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Migración Plataforma">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button"
+          aria-label="Ver detalles de Migración Plataforma">
           <div class="card-header">
             <span class="project-num">05 · Gestión & Volumen</span>
             <span class="project-area">PMO · Gestión de Proyectos</span>
@@ -210,16 +255,21 @@
             <span class="tag tag-gray">Migración</span>
           </div>
           <p class="project-desc">
-            Participé activamente en la preparación y ejecución de la migración hacia una nueva plataforma de seguimiento de proyectos. Me encargué del testing funcional y la adaptación de más de 150 proyectos al nuevo entorno, asegurando continuidad operativa y consistencia de datos durante el proceso de transición.
+            Participé activamente en la preparación y ejecución de la migración hacia una nueva plataforma de
+            seguimiento de proyectos. Me encargué del testing funcional y la adaptación de más de 150 proyectos al nuevo
+            entorno, asegurando continuidad operativa y consistencia de datos durante el proceso de transición.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
         <!-- PROYECTO 6 -->
-        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button" aria-label="Ver detalles de Voces en Acción">
+        <article class="project-card clickable-card" onclick="openProjectModal(this)" tabindex="0" role="button"
+          aria-label="Ver detalles de Voces en Acción">
           <div class="card-header">
             <span class="project-num">06 · Cultura & Embajador</span>
             <span class="project-area">Comunicación Corporativa · Employer Branding</span>
@@ -231,14 +281,20 @@
             <span class="tag tag-gray">Redes Sociales</span>
           </div>
           <div class="project-media-thumb">
-            <img src="Media/IMG-20260316-WA0033.jpg" alt="Equipo Bayer en ExpoAgro - Si es Agro es Bayer" class="project-thumb-img" width="600" height="450" loading="lazy" onerror="this.onerror=null; this.src='IMG-20260316-WA0033.jpg';">
+            <img src="Media/IMG-20260316-WA0033.jpg" alt="Equipo Bayer en ExpoAgro - Si es Agro es Bayer"
+              class="project-thumb-img" width="600" height="450" loading="lazy"
+              onerror="this.onerror=null; this.src='IMG-20260316-WA0033.jpg';">
           </div>
           <p class="project-desc">
-            Seleccionado para participar en el programa interno <em>Voces en Acción</em>, actuando como embajador de Bayer en redes sociales. Representé la cultura y los valores de la compañía desde la perspectiva de un pasante, contribuyendo a la estrategia de employer branding y presencia digital de Bayer Argentina.
+            Seleccionado para participar en el programa interno <em>Voces en Acción</em>, actuando como embajador de
+            Bayer en redes sociales. Representé la cultura y los valores de la compañía desde la perspectiva de un
+            pasante, contribuyendo a la estrategia de employer branding y presencia digital de Bayer Argentina.
           </p>
           <div class="card-action-hint">
             <span>Ver caso completo</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </div>
         </article>
 
@@ -248,7 +304,7 @@
     <!-- 4. HABILIDADES DESTACADAS -->
     <section class="section skills-section" id="habilidades">
       <h2 class="section-title">Habilidades & Herramientas</h2>
-      
+
       <div class="skills-container">
         <div class="skills-block">
           <h3 class="skills-category-title">Herramientas & Tecnologías</h3>
@@ -307,29 +363,42 @@
     <!-- 5. CIERRE / CONTACTO -->
     <section class="section contact-section" id="contacto">
       <h2 class="section-title">Contacto</h2>
-      
+
       <div class="contact-box">
         <div class="contact-grid">
           <div class="contact-info-col">
             <p class="contact-closing">
-              Gracias por tu tiempo e interés. Quedo 100% disponible para seguir la conversación y explorar cómo sumar valor a tu equipo.
+              Gracias por tu tiempo e interés. Quedo 100% disponible para seguir la conversación y explorar cómo sumar
+              valor a tu equipo.
             </p>
 
             <!-- Acciones directas de contacto -->
             <div class="contact-actions">
-              <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer" class="btn btn-contact-item" aria-label="Visitar perfil profesional en LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+              <a href="https://www.linkedin.com/in/garciathixtonjuan" target="_blank" rel="noopener noreferrer"
+                class="btn btn-contact-item" aria-label="Visitar perfil profesional en LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z" />
+                </svg>
                 <span>LinkedIn · Perfil profesional</span>
               </a>
 
               <!-- Botón WhatsApp anti-crawlers (número generado dinámicamente en JS) -->
-              <button type="button" class="btn btn-contact-item btn-contact-wa" onclick="openWhatsAppChat()" title="Iniciar conversación directa por WhatsApp" aria-label="Abrir conversación directa por WhatsApp">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24l-.18.01zm-3.52 3.63c-.19 0-.42.07-.64.31-.22.25-.85.83-.85 2.02s.87 2.34 1 2.51c.12.17 1.7 2.6 4.12 3.65.58.25 1.02.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.17-.47-.29-.25-.12-1.44-.71-1.66-.79-.22-.09-.39-.13-.55.13-.17.25-.64.79-.79.95-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42l-.48-.01z"/></svg>
+              <button type="button" class="btn btn-contact-item btn-contact-wa" onclick="openWhatsAppChat()"
+                title="Iniciar conversación directa por WhatsApp" aria-label="Abrir conversación directa por WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24l-.18.01zm-3.52 3.63c-.19 0-.42.07-.64.31-.22.25-.85.83-.85 2.02s.87 2.34 1 2.51c.12.17 1.7 2.6 4.12 3.65.58.25 1.02.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.17-.47-.29-.25-.12-1.44-.71-1.66-.79-.22-.09-.39-.13-.55.13-.17.25-.64.79-.79.95-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42l-.48-.01z" />
+                </svg>
                 <span>WhatsApp · Conversación directa</span>
               </button>
 
-              <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer" class="btn btn-contact-item" aria-label="Enviar correo electrónico a juanba2604@gmail.com">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:juanba2604@gmail.com?subject=Contacto%20desde%20Science%20Fair%20Bayer"
+                class="btn btn-contact-item" aria-label="Enviar correo electrónico a juanba2604@gmail.com">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
                 <span>Email · juanba2604@gmail.com</span>
               </a>
             </div>
@@ -339,20 +408,37 @@
             <!-- Descargas de CV -->
             <span class="cv-label">Curriculum Vitae:</span>
             <div class="cv-buttons">
-              <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv" aria-label="Descargar Curriculum Vitae en Español formato PDF">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <a href="https://drive.google.com/file/d/1UPweubRLChRQMcndr150nxgOMerf911R/view?usp=drive_link"
+                target="_blank" rel="noopener noreferrer" class="btn btn-cv"
+                aria-label="Descargar Curriculum Vitae en Español formato PDF">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
                 <span>Descargar CV en Español (PDF · 1 Pág.)</span>
               </a>
-              <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-cv" aria-label="Download Curriculum Vitae in English PDF format">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <a href="https://drive.google.com/file/d/1AdFF5vL1UBBmXyYleyKAYMBW5lOrtxBT/view?usp=drive_link"
+                target="_blank" rel="noopener noreferrer" class="btn btn-cv"
+                aria-label="Download Curriculum Vitae in English PDF format">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
                 <span>Download CV in English (PDF · 1 Page)</span>
               </a>
             </div>
 
             <!-- Botón Guardar en Contactos (.vcf) para celular -->
             <div class="vcf-wrapper">
-              <button class="btn btn-vcf" onclick="downloadVCard()" aria-label="Guardar contacto en la agenda del teléfono en formato vCard">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+              <button class="btn btn-vcf" onclick="downloadVCard()"
+                aria-label="Guardar contacto en la agenda del teléfono en formato vCard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
                 <span>Guardar contacto en tu teléfono (.vcf)</span>
               </button>
             </div>
@@ -370,33 +456,69 @@
 
   </div>
 
-  <!-- Modal para ver foto completa -->
-  <div class="photo-modal-backdrop" id="photoModal" onclick="closePhotoModal()" role="dialog" aria-modal="true" aria-labelledby="photoCaptionTitle">
+  <!-- Modal para ver foto completa / Galería deslizante -->
+  <div class="photo-modal-backdrop" id="photoModal" onclick="closePhotoModal()" role="dialog" aria-modal="true"
+    aria-labelledby="photoCaptionTitle">
     <div class="photo-modal-content" onclick="event.stopPropagation()">
-      <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Cerrar vista de fotografía">&times;</button>
-      <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton con el logo de Bayer" class="full-photo-img" width="480" height="640" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='1000728779.jpg';">
+      <button class="photo-modal-close" onclick="closePhotoModal()"
+        aria-label="Cerrar galería de fotografías">&times;</button>
+
+      <!-- Contenedor del Slider / Galería -->
+      <div class="photo-slider-container" id="photoSliderContainer">
+        <button type="button" class="slider-btn slider-btn-prev" onclick="prevGalleryPhoto()"
+          aria-label="Fotografía anterior" id="galleryPrevBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <img src="Media/1000728779.jpg" alt="Juan Bautista García Thixton con el logo de Bayer" class="full-photo-img"
+          id="galleryMainImg" width="480" height="640" loading="lazy" decoding="async"
+          onerror="this.onerror=null; this.src='1000728779.jpg';">
+
+        <button type="button" class="slider-btn slider-btn-next" onclick="nextGalleryPhoto()"
+          aria-label="Siguiente fotografía" id="galleryNextBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
       <div class="photo-modal-footer">
-        <span class="photo-caption-title" id="photoCaptionTitle">Juan Bautista García Thixton</span>
-        <span class="photo-caption-sub">Bayer Argentina · Pasantía 2025–2027</span>
+        <div class="photo-footer-left">
+          <span class="photo-caption-title" id="photoCaptionTitle">Juan Bautista García Thixton</span>
+          <span class="photo-caption-sub" id="photoCaptionSub">Bayer Argentina · Pasantía 2025–2027</span>
+        </div>
+        <div class="photo-gallery-nav">
+          <span class="gallery-counter" id="galleryCounter">1 / 3</span>
+          <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Fotografías del perfil">
+            <button type="button" class="gallery-dot active" onclick="goToGalleryPhoto(0)" aria-label="Fotografía 1: Juan Bautista García Thixton" aria-selected="true" role="tab"></button>
+            <button type="button" class="gallery-dot" onclick="goToGalleryPhoto(1)" aria-label="Fotografía 2: Presencia en ExpoAgro" aria-selected="false" role="tab"></button>
+            <button type="button" class="gallery-dot" onclick="goToGalleryPhoto(2)" aria-label="Fotografía 3: Equipo Crop Protection" aria-selected="false" role="tab"></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Modal Detallado de Proyecto -->
-  <div class="project-modal-backdrop" id="projectModal" onclick="closeProjectModal()" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+  <div class="project-modal-backdrop" id="projectModal" onclick="closeProjectModal()" role="dialog" aria-modal="true"
+    aria-labelledby="modalProjectTitle">
     <div class="project-modal-content" onclick="event.stopPropagation()">
       <div class="project-modal-header">
         <div class="project-modal-meta">
           <span class="modal-project-num" id="modalProjectNum">01 · Origen</span>
           <span class="modal-project-area" id="modalProjectArea">Regulatory Affairs · Cono Sur</span>
         </div>
-        <button class="project-modal-close" onclick="closeProjectModal()" aria-label="Cerrar modal de proyecto">&times;</button>
+        <button class="project-modal-close" onclick="closeProjectModal()"
+          aria-label="Cerrar modal de proyecto">&times;</button>
       </div>
       <div class="project-modal-body">
         <h3 class="modal-project-title" id="modalProjectTitle">Título del Proyecto</h3>
         <div class="modal-project-tags" id="modalProjectTags"></div>
         <div class="modal-project-media" id="modalProjectMedia" style="display: none;">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Fotografía del proyecto" id="modalProjectImg" class="modal-media-img">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+            alt="Fotografía del proyecto" id="modalProjectImg" class="modal-media-img">
         </div>
         <div class="modal-project-desc-wrapper">
           <h4 class="modal-desc-heading">Alcance e Impacto del Proyecto:</h4>
@@ -405,9 +527,12 @@
       </div>
       <div class="project-modal-footer">
         <button class="btn btn-outline" onclick="closeProjectModal()">Cerrar</button>
-        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()" aria-label="Contactar sobre este proyecto">
+        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()"
+          aria-label="Contactar sobre este proyecto">
           <span>Consultar por este proyecto</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
         </a>
       </div>
     </div>
@@ -418,4 +543,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
