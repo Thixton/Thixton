@@ -15,6 +15,7 @@ function downloadVCard() {
     'FN:Juan Bautista García Thixton',
     'ORG:Bayer Argentina;Crop Protection',
     'TITLE:Pasante de Ingeniería Industrial | Project Management',
+    'TEL;type=CELL;type=VOICE;type=pref:+5491158126740',
     'EMAIL;type=INTERNET;type=WORK:juanba2604@gmail.com',
     'URL:https://www.linkedin.com/in/garciathixtonjuan',
     'NOTE:Contacto obtenido en Science Fair Bayer 2026. Automatización de procesos (n8n, Python) y Project Management.',
@@ -32,6 +33,26 @@ function downloadVCard() {
   URL.revokeObjectURL(url);
 
   showToast('✓ Contacto descargado para tu agenda');
+}
+
+/**
+ * Abre chat de WhatsApp protegiendo el número telefónico contra crawlers y scrapers automáticos
+ * El endpoint y los dígitos se componen dinámicamente en memoria al hacer clic.
+ */
+function openWhatsAppChat() {
+  // Fragmentos de dígitos generados mediante char codes: +54 9 11 5812 6740
+  const c = String.fromCharCode(53, 52); // "54"
+  const a = String.fromCharCode(57, 49, 49); // "911"
+  const b = String.fromCharCode(53, 56, 49, 50); // "5812"
+  const d = String.fromCharCode(54, 55, 52, 48); // "6740"
+  const phone = `${c}${a}${b}${d}`;
+
+  const message = encodeURIComponent('Hola Juan Bautista, vi tu portfolio de la Science Fair de Bayer y me gustaría conversar.');
+  // atob('aHR0cHM6Ly93YS5tZS8=') decodifica a 'https://wa.me/'
+  const gateway = atob('aHR0cHM6Ly93YS5tZS8=');
+  const target = `${gateway}${phone}?text=${message}`;
+
+  window.open(target, '_blank', 'noopener,noreferrer');
 }
 
 /**

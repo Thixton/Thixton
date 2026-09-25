@@ -673,9 +673,11 @@ body {
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   color: var(--dark-navy);
+  font-family: inherit;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
   transition: all var(--trans-fast);
 }
 
@@ -684,6 +686,12 @@ body {
   border-color: var(--bayer-green);
   color: var(--bayer-green);
   transform: translateX(3px);
+}
+
+.btn-contact-wa:hover {
+  border-color: #25D366;
+  color: #128C7E;
+  background-color: #F0FDF4;
 }
 
 .cv-downloads-wrapper {
