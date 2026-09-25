@@ -1459,6 +1459,10 @@ h1, h2, h3, .project-title, .hero-name {
   flex-direction: column;
   gap: 14px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 163, 66, 0.4) transparent;
 }
 
 .modal-project-title {
@@ -1492,8 +1496,8 @@ h1, h2, h3, .project-title, .hero-name {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 220px;
-  max-height: clamp(260px, 58vh, 480px);
+  min-height: 180px;
+  max-height: clamp(240px, 46vh, 400px);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
@@ -1502,11 +1506,13 @@ h1, h2, h3, .project-title, .hero-name {
 }
 
 .modal-media-img {
-  width: 100%;
+  max-width: 100%;
+  max-height: clamp(240px, 46vh, 400px);
+  width: auto;
   height: auto;
-  max-height: clamp(260px, 58vh, 480px);
   object-fit: contain;
   display: block;
+  margin: 0 auto;
   transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1641,8 +1647,9 @@ h1, h2, h3, .project-title, .hero-name {
 .cv-modal-content {
   background-color: #FFFFFF;
   border-radius: var(--radius-lg);
-  max-width: 820px;
+  max-width: 880px;
   width: 100%;
+  height: min(88vh, 860px);
   max-height: 92vh;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   position: relative;
@@ -1806,19 +1813,19 @@ h1, h2, h3, .project-title, .hero-name {
   width: 100%;
   flex: 1;
   min-height: 480px;
-  max-height: 64vh;
   background-color: #525659;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
 .cv-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: none;
   background-color: #FFFFFF;
+  display: block;
   transition: opacity 0.25s ease;
 }
 
@@ -1981,7 +1988,10 @@ h1, h2, h3, .project-title, .hero-name {
   }
 
   .modal-media-img {
+    max-width: 100%;
     max-height: 190px;
+    width: auto;
+    height: auto;
   }
 
   .project-slider-footer {
@@ -1992,12 +2002,15 @@ h1, h2, h3, .project-title, .hero-name {
 /* Adaptación móvil para el carrusel de proyectos y modal de CV (< 480px) */
 @media (max-width: 480px) {
   .project-slider-wrapper {
-    min-height: 180px;
-    max-height: clamp(200px, 38vh, 280px);
+    min-height: 170px;
+    max-height: clamp(190px, 36vh, 260px);
   }
 
   .modal-media-img {
-    max-height: clamp(200px, 38vh, 280px);
+    max-width: 100%;
+    max-height: clamp(190px, 36vh, 260px);
+    width: auto;
+    height: auto;
   }
 
   .project-slider-footer {
@@ -2013,6 +2026,7 @@ h1, h2, h3, .project-title, .hero-name {
   }
 
   .cv-modal-content {
+    height: 94vh;
     max-height: 96vh;
     border-radius: var(--radius-md);
   }
@@ -2041,8 +2055,10 @@ h1, h2, h3, .project-title, .hero-name {
   }
 
   .cv-iframe-container {
-    min-height: 380px;
-    max-height: 56vh;
+    min-height: 0;
+    flex: 1;
+    height: 100%;
+    max-height: none;
   }
 
   .cv-modal-footer {
