@@ -212,6 +212,78 @@ function closePhotoModal(fromPopState = false) {
 }
 
 /**
+ * Galería de imágenes para el Modal de Proyectos
+ */
+let currentProjectImages = [];
+let currentProjectImageIndex = 0;
+
+function renderProjectPhoto(index, transition = false) {
+  if (!currentProjectImages || currentProjectImages.length === 0) return;
+  if (index < 0) index = currentProjectImages.length - 1;
+  if (index >= currentProjectImages.length) index = 0;
+  currentProjectImageIndex = index;
+
+  const item = currentProjectImages[currentProjectImageIndex];
+  const img = document.getElementById('modalProjectImg');
+  const capTitle = document.getElementById('projectCaptionTitle');
+  const capSub = document.getElementById('projectCaptionSub');
+  const counter = document.getElementById('projectGalleryCounter');
+  const dotsContainer = document.getElementById('projectGalleryDots');
+
+  if (transition && img) {
+    img.style.opacity = '0.35';
+    img.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+      img.src = item.src;
+      img.alt = item.alt || item.title || 'Fotografía del proyecto';
+      img.onerror = () => { img.onerror = null; if (item.fallback) img.src = item.fallback; };
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    }, 120);
+  } else if (img) {
+    img.src = item.src;
+    img.alt = item.alt || item.title || 'Fotografía del proyecto';
+    img.onerror = () => { img.onerror = null; if (item.fallback) img.src = item.fallback; };
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }
+
+  if (capTitle) capTitle.textContent = item.title || '';
+  if (capSub) capSub.textContent = item.caption || '';
+  if (counter) counter.textContent = `${currentProjectImageIndex + 1} / ${currentProjectImages.length}`;
+
+  if (dotsContainer) {
+    const dots = dotsContainer.querySelectorAll('.gallery-dot');
+    dots.forEach((dot, i) => {
+      const isActive = i === currentProjectImageIndex;
+      if (isActive) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.classList.remove('active');
+        dot.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+}
+
+function nextProjectPhoto() {
+  if (currentProjectImages.length > 1) {
+    renderProjectPhoto(currentProjectImageIndex + 1, true);
+  }
+}
+
+function prevProjectPhoto() {
+  if (currentProjectImages.length > 1) {
+    renderProjectPhoto(currentProjectImageIndex - 1, true);
+  }
+}
+
+function goToProjectPhoto(index) {
+  renderProjectPhoto(index, true);
+}
+
+/**
  * Control del Modal de Detalle de Proyecto con sincronización de historial y focus trap
  */
 function openProjectModal(cardElement) {
@@ -224,7 +296,6 @@ function openProjectModal(cardElement) {
   const title = cardElement.querySelector('.project-title')?.textContent || '';
   const tagsHtml = cardElement.querySelector('.project-tags')?.innerHTML || '';
   const descHtml = cardElement.querySelector('.project-desc')?.innerHTML || '';
-  const imgEl = cardElement.querySelector('.project-thumb-img');
 
   const numEl = document.getElementById('modalProjectNum');
   const areaEl = document.getElementById('modalProjectArea');
@@ -232,7 +303,6 @@ function openProjectModal(cardElement) {
   const tagsEl = document.getElementById('modalProjectTags');
   const descEl = document.getElementById('modalProjectDesc');
   const mediaContainer = document.getElementById('modalProjectMedia');
-  const modalImg = document.getElementById('modalProjectImg');
   const closeBtn = modal.querySelector('.project-modal-close');
 
   if (numEl) numEl.textContent = num;
@@ -241,10 +311,79 @@ function openProjectModal(cardElement) {
   if (tagsEl) tagsEl.innerHTML = tagsHtml;
   if (descEl) descEl.innerHTML = descHtml;
 
-  if (imgEl && imgEl.src && mediaContainer && modalImg) {
-    modalImg.src = imgEl.src;
-    modalImg.alt = imgEl.alt || title;
+  // Carga de imágenes (galería múltiple o imagen individual)
+  let images = [];
+  const imagesData = cardElement.getAttribute('data-images');
+  if (imagesData) {
+    try {
+      images = JSON.parse(imagesData);
+    } catch (e) {
+      console.warn('Error al parsear data-images del proyecto:', e);
+    }
+  }
+
+  if (images.length === 0) {
+    const singleThumb = cardElement.querySelector('.project-thumb-img');
+    if (singleThumb && singleThumb.src) {
+      images = [{
+        src: singleThumb.src,
+        fallback: singleThumb.getAttribute('src') || '',
+        alt: singleThumb.alt || title,
+        title: title,
+        caption: area
+      }];
+    }
+  }
+
+  currentProjectImages = images;
+  currentProjectImageIndex = 0;
+
+  const prevBtn = document.getElementById('projectSliderPrevBtn');
+  const nextBtn = document.getElementById('projectSliderNextBtn');
+  const sliderFooter = document.getElementById('projectSliderFooter');
+  const dotsContainer = document.getElementById('projectGalleryDots');
+
+  if (images.length > 0 && mediaContainer) {
     mediaContainer.style.display = 'block';
+
+    if (images.length > 1) {
+      if (prevBtn) prevBtn.style.display = 'flex';
+      if (nextBtn) nextBtn.style.display = 'flex';
+      if (sliderFooter) sliderFooter.style.display = 'flex';
+
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        images.forEach((item, idx) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = `gallery-dot ${idx === 0 ? 'active' : ''}`;
+          dot.setAttribute('aria-label', `Imagen ${idx + 1}: ${item.title || title}`);
+          dot.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+          dot.setAttribute('role', 'tab');
+          dot.addEventListener('click', () => goToProjectPhoto(idx));
+          dotsContainer.appendChild(dot);
+        });
+      }
+    } else {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (sliderFooter) {
+        if (images[0].caption || images[0].title) {
+          sliderFooter.style.display = 'flex';
+          const capTitle = document.getElementById('projectCaptionTitle');
+          const capSub = document.getElementById('projectCaptionSub');
+          const counter = document.getElementById('projectGalleryCounter');
+          if (capTitle) capTitle.textContent = images[0].title || '';
+          if (capSub) capSub.textContent = images[0].caption || '';
+          if (counter) counter.textContent = '1 / 1';
+          if (dotsContainer) dotsContainer.innerHTML = '';
+        } else {
+          sliderFooter.style.display = 'none';
+        }
+      }
+    }
+
+    renderProjectPhoto(0, false);
   } else if (mediaContainer) {
     mediaContainer.style.display = 'none';
   }
@@ -316,7 +455,7 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 
-  // Navegación por teclado dentro de la galería (flechas izquierda / derecha)
+  // Navegación por teclado dentro de la galería de perfil (flechas izquierda / derecha)
   const photoModal = document.getElementById('photoModal');
   if (photoModal && photoModal.classList.contains('open')) {
     if (e.key === 'ArrowRight') {
@@ -325,9 +464,19 @@ document.addEventListener('keydown', (e) => {
       prevGalleryPhoto();
     }
   }
+
+  // Navegación por teclado dentro del modal de proyecto (flechas izquierda / derecha)
+  const projectModal = document.getElementById('projectModal');
+  if (projectModal && projectModal.classList.contains('open') && currentProjectImages.length > 1) {
+    if (e.key === 'ArrowRight') {
+      nextProjectPhoto();
+    } else if (e.key === 'ArrowLeft') {
+      prevProjectPhoto();
+    }
+  }
 });
 
-// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para la galería
+// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para la galería de perfil
 let touchStartX = 0;
 let touchStartY = 0;
 
@@ -355,9 +504,39 @@ function setupGalleryTouchGestures() {
   }, { passive: true });
 }
 
+// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para el carrusel del proyecto
+function setupProjectTouchGestures() {
+  const container = document.getElementById('projectSliderWrapper');
+  if (!container) return;
+
+  let pTouchStartX = 0;
+  let pTouchStartY = 0;
+
+  container.addEventListener('touchstart', (e) => {
+    pTouchStartX = e.touches[0].clientX;
+    pTouchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (!currentProjectImages || currentProjectImages.length <= 1) return;
+    const diffX = e.changedTouches[0].clientX - pTouchStartX;
+    const diffY = e.changedTouches[0].clientY - pTouchStartY;
+
+    // Si el gesto es horizontal y supera 35px de umbral
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+      if (diffX < 0) {
+        nextProjectPhoto(); // Deslizar hacia la izquierda avanza a la siguiente imagen
+      } else {
+        prevProjectPhoto(); // Deslizar hacia la derecha retrocede a la anterior imagen
+      }
+    }
+  }, { passive: true });
+}
+
 // Inicialización de accesibilidad y eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
   setupGalleryTouchGestures();
+  setupProjectTouchGestures();
 
   const clickableCards = document.querySelectorAll('.clickable-card');
   clickableCards.forEach(card => {
