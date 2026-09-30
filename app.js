@@ -6,10 +6,27 @@
 let lastFocusedTrigger = null;
 
 /**
+ * Generación protegida de datos de contacto en memoria (mitigación de scraping automatizado)
+ */
+function getContactDetails() {
+  const c = String.fromCharCode(53, 52); // "54"
+  const a = String.fromCharCode(57, 49, 49); // "911"
+  const b = String.fromCharCode(53, 56, 49, 50); // "5812"
+  const d = String.fromCharCode(54, 55, 52, 48); // "6740"
+  const phoneFormatted = `+${c}${a}${b}${d}`;
+  const rawPhone = `${c}${a}${b}${d}`;
+  const user = atob('anVhbmJhMjYwNA==');
+  const domain = atob('Z21haWwuY29t');
+  const email = `${user}@${domain}`;
+  return { phoneFormatted, rawPhone, email };
+}
+
+/**
  * Descarga la tarjeta de contacto (.vcf) directa al celular
  * Optimizada para importar en iOS y Android con un solo tap tras el escaneo NFC
  */
 function downloadVCard() {
+  const { phoneFormatted, email } = getContactDetails();
   const vcardData = [
     'BEGIN:VCARD',
     'VERSION:3.0',
@@ -17,23 +34,36 @@ function downloadVCard() {
     'FN:Juan Bautista García Thixton',
     'ORG:Bayer Argentina;Crop Protection',
     'TITLE:Pasante de Ingeniería Industrial | Project Management',
-    'TEL;type=CELL;type=VOICE;type=pref:+5491158126740',
-    'EMAIL;type=INTERNET;type=WORK:juanba2604@gmail.com',
+    `TEL;type=CELL;type=VOICE;type=pref:${phoneFormatted}`,
+    `EMAIL;type=INTERNET;type=WORK:${email}`,
     'URL:https://www.linkedin.com/in/garciathixtonjuan',
     'NOTE:Contacto obtenido en Science Fair Bayer 2026. Automatización de procesos (n8n, Python) y Project Management.',
     'END:VCARD'
   ].join('\r\n');
 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  if (isIOS) {
+    // iOS Safari / WebViews: data URI directo abre la app nativa de Contactos de Apple
+    window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
+    showToast('✓ Abriendo tarjeta de contacto');
+    return;
+  }
+
+  // Android y navegadores Desktop: Blob + anchor download
   try {
     const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'Juan_Bautista_Garcia_Thixton_Bayer.vcf';
+    a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1000);
     showToast('✓ Contacto descargado para tu agenda');
   } catch (err) {
     console.warn('Fallback para descarga de vCard:', err);
@@ -48,20 +78,19 @@ function downloadVCard() {
 
 /**
  * Abre chat de WhatsApp protegiendo el número telefónico contra crawlers y scrapers automáticos
- * El endpoint y los dígitos se componen dinámicamente en memoria al hacer clic.
+ * En móviles utiliza navegación directa para evitar bloqueo por popup blockers o webviews.
  */
 function openWhatsAppChat() {
-  const c = String.fromCharCode(53, 52); // "54"
-  const a = String.fromCharCode(57, 49, 49); // "911"
-  const b = String.fromCharCode(53, 56, 49, 50); // "5812"
-  const d = String.fromCharCode(54, 55, 52, 48); // "6740"
-  const phone = `${c}${a}${b}${d}`;
-
+  const { rawPhone } = getContactDetails();
   const message = encodeURIComponent('Hola Juan Bautista, vi tu portfolio de la Science Fair de Bayer y me gustaría conversar.');
-  const gateway = atob('aHR0cHM6Ly93YS5tZS8=');
-  const target = `${gateway}${phone}?text=${message}`;
+  const target = `https://wa.me/${rawPhone}?text=${message}`;
 
-  window.open(target, '_blank', 'noopener,noreferrer');
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.location.href = target;
+  } else {
+    window.open(target, '_blank', 'noopener,noreferrer');
+  }
 }
 
 /**
@@ -299,8 +328,8 @@ function openProjectModal(cardElement) {
   const num = cardElement.querySelector('.project-num')?.textContent || '';
   const area = cardElement.querySelector('.project-area')?.textContent || '';
   const title = cardElement.querySelector('.project-title')?.textContent || '';
-  const tagsHtml = cardElement.querySelector('.project-tags')?.innerHTML || '';
-  const descHtml = cardElement.querySelector('.project-desc')?.innerHTML || '';
+  const tagsSource = cardElement.querySelector('.project-tags');
+  const descSource = cardElement.querySelector('.project-desc');
 
   const numEl = document.getElementById('modalProjectNum');
   const areaEl = document.getElementById('modalProjectArea');
@@ -313,8 +342,12 @@ function openProjectModal(cardElement) {
   if (numEl) numEl.textContent = num;
   if (areaEl) areaEl.textContent = area;
   if (titleEl) titleEl.textContent = title;
-  if (tagsEl) tagsEl.innerHTML = tagsHtml;
-  if (descEl) descEl.innerHTML = descHtml;
+  if (tagsEl) {
+    tagsEl.replaceChildren(...(tagsSource ? tagsSource.cloneNode(true).childNodes : []));
+  }
+  if (descEl) {
+    descEl.replaceChildren(...(descSource ? descSource.cloneNode(true).childNodes : []));
+  }
 
   // Carga de imágenes (galería múltiple o imagen individual)
   let images = [];
@@ -416,6 +449,19 @@ function closeProjectModal(fromPopState = false) {
       lastFocusedTrigger = null;
     }
   }
+}
+
+/**
+ * Cierra el modal de proyecto y desplaza suavemente la vista a la sección de contacto
+ */
+function navigateToContactFromModal() {
+  closeProjectModal();
+  setTimeout(() => {
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 120);
 }
 
 /**

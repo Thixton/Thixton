@@ -20,6 +20,7 @@
   <meta name="apple-mobile-web-app-title" content="Bayer Portfolio">
   <meta name="format-detection" content="telephone=no">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://drive.google.com; connect-src 'self'; base-uri 'self'; form-action 'self';">
 
   <!-- Preload de recursos críticos above-the-fold -->
   <link rel="preload" as="image" href="Media/Logo bayer.png">
@@ -461,7 +462,7 @@
 
             <!-- Botón Guardar en Contactos (.vcf) para celular -->
             <div class="vcf-wrapper">
-              <button class="btn btn-vcf" onclick="downloadVCard()"
+              <button type="button" class="btn btn-vcf" onclick="downloadVCard()"
                 aria-label="Guardar contacto en la agenda del teléfono en formato vCard">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
@@ -578,14 +579,14 @@
         </div>
       </div>
       <div class="project-modal-footer">
-        <button class="btn btn-outline" onclick="closeProjectModal()">Cerrar</button>
-        <a href="#contacto" class="btn btn-primary" onclick="closeProjectModal()"
+        <button type="button" class="btn btn-outline" onclick="closeProjectModal()">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="navigateToContactFromModal()"
           aria-label="Contactar sobre este proyecto">
           <span>Consultar por este proyecto</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -651,7 +652,7 @@
           <span>Cargando documento PDF...</span>
         </div>
         <iframe id="cvIframe" class="cv-iframe" src="" title="Previsualización embebida de Curriculum Vitae"
-          allow="autoplay" loading="lazy"></iframe>
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms" loading="lazy"></iframe>
       </div>
 
       <div class="cv-modal-footer">

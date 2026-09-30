@@ -428,22 +428,11 @@ h1, h2, h3, .project-title, .hero-name {
 .section {
   padding: 28px 20px;
   border-bottom: 1px solid var(--border-light);
+  scroll-margin-top: 72px;
 }
 
-/* Content-visibility para reducir el costo de pintura y parsing inicial en mobile */
-.projects-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 1100px;
-}
-
-.skills-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 450px;
-}
-
-.contact-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 550px;
+.hero-section {
+  scroll-margin-top: 72px;
 }
 
 .section-header {
