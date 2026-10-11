@@ -628,11 +628,56 @@ h1, h2, h3, .project-title, .hero-name {
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .project-media-thumb:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
+}
+
+.thumb-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  background: rgba(14, 18, 26, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background var(--trans-fast), transform var(--trans-fast), opacity var(--trans-fast);
+  opacity: 0.9;
+}
+
+.thumb-nav-btn:hover {
+  background: var(--bayer-green);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.thumb-nav-btn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+.thumb-nav-prev {
+  left: 8px;
+}
+
+.thumb-nav-next {
+  right: 8px;
 }
 
 .project-thumb-img {
@@ -641,7 +686,7 @@ h1, h2, h3, .project-title, .hero-name {
   object-fit: cover;
   object-position: top center;
   display: block;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
 }
 
 .project-card:hover .project-thumb-img,
@@ -1491,7 +1536,12 @@ h1, h2, h3, .project-title, .hero-name {
   user-select: none;
   -webkit-user-select: none;
   touch-action: pan-y;
+  cursor: grab;
   transition: background-color 0.25s ease;
+}
+
+.project-slider-wrapper:active {
+  cursor: grabbing;
 }
 
 .modal-media-img {
@@ -1502,6 +1552,7 @@ h1, h2, h3, .project-title, .hero-name {
   object-fit: contain;
   display: block;
   margin: 0 auto;
+  pointer-events: none;
   transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

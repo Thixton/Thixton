@@ -374,10 +374,13 @@ function openProjectModal(cardElement) {
   }
 
   currentProjectImages = images;
-  currentProjectImageIndex = 0;
+  const initialIndex = parseInt(cardElement.dataset.cardImageIndex || '0', 10);
+  currentProjectImageIndex = initialIndex < images.length ? initialIndex : 0;
 
   const prevBtn = document.getElementById('projectSliderPrevBtn');
   const nextBtn = document.getElementById('projectSliderNextBtn');
+  const overlayPrev = document.getElementById('projectSliderOverlayPrevBtn');
+  const overlayNext = document.getElementById('projectSliderOverlayNextBtn');
   const sliderFooter = document.getElementById('projectSliderFooter');
   const dotsContainer = document.getElementById('projectGalleryDots');
 
@@ -387,6 +390,8 @@ function openProjectModal(cardElement) {
     if (images.length > 1) {
       if (prevBtn) prevBtn.style.display = 'flex';
       if (nextBtn) nextBtn.style.display = 'flex';
+      if (overlayPrev) overlayPrev.style.display = 'flex';
+      if (overlayNext) overlayNext.style.display = 'flex';
       if (sliderFooter) sliderFooter.style.display = 'flex';
 
       if (dotsContainer) {
@@ -394,9 +399,9 @@ function openProjectModal(cardElement) {
         images.forEach((item, idx) => {
           const dot = document.createElement('button');
           dot.type = 'button';
-          dot.className = `gallery-dot ${idx === 0 ? 'active' : ''}`;
+          dot.className = `gallery-dot ${idx === currentProjectImageIndex ? 'active' : ''}`;
           dot.setAttribute('aria-label', `Imagen ${idx + 1}: ${item.title || title}`);
-          dot.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+          dot.setAttribute('aria-selected', idx === currentProjectImageIndex ? 'true' : 'false');
           dot.setAttribute('role', 'tab');
           dot.addEventListener('click', () => goToProjectPhoto(idx));
           dotsContainer.appendChild(dot);
@@ -405,6 +410,8 @@ function openProjectModal(cardElement) {
     } else {
       if (prevBtn) prevBtn.style.display = 'none';
       if (nextBtn) nextBtn.style.display = 'none';
+      if (overlayPrev) overlayPrev.style.display = 'none';
+      if (overlayNext) overlayNext.style.display = 'none';
       if (sliderFooter) {
         if (images[0].caption || images[0].title) {
           sliderFooter.style.display = 'flex';
@@ -421,7 +428,7 @@ function openProjectModal(cardElement) {
       }
     }
 
-    renderProjectPhoto(0, false);
+    renderProjectPhoto(currentProjectImageIndex, false);
   } else if (mediaContainer) {
     mediaContainer.style.display = 'none';
   }
@@ -626,67 +633,249 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para la galería de perfil
-let touchStartX = 0;
-let touchStartY = 0;
-
+// Soporte de gestos táctiles y ratón (Swipe / deslizar) para la galería de perfil
 function setupGalleryTouchGestures() {
   const container = document.getElementById('photoSliderContainer');
   if (!container) return;
 
+  let gStartX = 0;
+  let gStartY = 0;
+  let isPointerDown = false;
+
+  // Pointer events (unifica ratón y pantallas táctiles)
+  container.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    gStartX = e.clientX;
+    gStartY = e.clientY;
+    isPointerDown = true;
+  });
+
+  container.addEventListener('pointerup', (e) => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    const diffX = e.clientX - gStartX;
+    const diffY = e.clientY - gStartY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+      if (diffX < 0) {
+        nextGalleryPhoto();
+      } else {
+        prevGalleryPhoto();
+      }
+    }
+  });
+
+  container.addEventListener('pointercancel', () => { isPointerDown = false; });
+
+  // Touch events fallback para navegadores móviles
   container.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
+    gStartX = e.touches[0].clientX;
+    gStartY = e.touches[0].clientY;
   }, { passive: true });
 
   container.addEventListener('touchend', (e) => {
-    const diffX = e.changedTouches[0].clientX - touchStartX;
-    const diffY = e.changedTouches[0].clientY - touchStartY;
+    const diffX = e.changedTouches[0].clientX - gStartX;
+    const diffY = e.changedTouches[0].clientY - gStartY;
 
-    // Si el gesto es horizontal y supera 40px de umbral
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
       if (diffX < 0) {
-        nextGalleryPhoto(); // Deslizar hacia la izquierda avanza
+        nextGalleryPhoto();
       } else {
-        prevGalleryPhoto(); // Deslizar hacia la derecha retrocede
+        prevGalleryPhoto();
       }
     }
   }, { passive: true });
 }
 
-// Soporte de gestos táctiles (Swipe / deslizar con el dedo) en móvil para el carrusel del proyecto
+// Soporte de gestos (Swipe / deslizar con dedo o ratón) para el modal de proyecto
 function setupProjectTouchGestures() {
   const container = document.getElementById('projectSliderWrapper');
   if (!container) return;
 
-  let pTouchStartX = 0;
-  let pTouchStartY = 0;
+  let pStartX = 0;
+  let pStartY = 0;
+  let isPointerDown = false;
+
+  container.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    pStartX = e.clientX;
+    pStartY = e.clientY;
+    isPointerDown = true;
+  });
+
+  container.addEventListener('pointerup', (e) => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    if (!currentProjectImages || currentProjectImages.length <= 1) return;
+    const diffX = e.clientX - pStartX;
+    const diffY = e.clientY - pStartY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+      if (diffX < 0) {
+        nextProjectPhoto();
+      } else {
+        prevProjectPhoto();
+      }
+    }
+  });
+
+  container.addEventListener('pointercancel', () => { isPointerDown = false; });
 
   container.addEventListener('touchstart', (e) => {
-    pTouchStartX = e.touches[0].clientX;
-    pTouchStartY = e.touches[0].clientY;
+    pStartX = e.touches[0].clientX;
+    pStartY = e.touches[0].clientY;
   }, { passive: true });
 
   container.addEventListener('touchend', (e) => {
     if (!currentProjectImages || currentProjectImages.length <= 1) return;
-    const diffX = e.changedTouches[0].clientX - pTouchStartX;
-    const diffY = e.changedTouches[0].clientY - pTouchStartY;
+    const diffX = e.changedTouches[0].clientX - pStartX;
+    const diffY = e.changedTouches[0].clientY - pStartY;
 
-    // Si el gesto es horizontal y supera 35px de umbral
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
       if (diffX < 0) {
-        nextProjectPhoto(); // Deslizar hacia la izquierda avanza a la siguiente imagen
+        nextProjectPhoto();
       } else {
-        prevProjectPhoto(); // Deslizar hacia la derecha retrocede a la anterior imagen
+        prevProjectPhoto();
       }
     }
   }, { passive: true });
+}
+
+// Soporte de slider y swipe interactivo directamente en las cards del listado principal
+function stepCardPhoto(card, step) {
+  let images = [];
+  try {
+    images = JSON.parse(card.getAttribute('data-images') || '[]');
+  } catch (e) {
+    return;
+  }
+  if (images.length <= 1) return;
+
+  let currentIndex = parseInt(card.dataset.cardImageIndex || '0', 10);
+  currentIndex = (currentIndex + step + images.length) % images.length;
+  card.dataset.cardImageIndex = currentIndex.toString();
+
+  const img = card.querySelector('.project-thumb-img');
+  const badgeText = card.querySelector('.thumb-badge-text');
+
+  if (img) {
+    img.style.opacity = '0.35';
+    img.style.transform = 'scale(0.97)';
+    setTimeout(() => {
+      img.src = images[currentIndex].src;
+      img.alt = images[currentIndex].alt || '';
+      img.onerror = () => { img.onerror = null; if (images[currentIndex].fallback) img.src = images[currentIndex].fallback; };
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    }, 120);
+  }
+
+  if (badgeText) {
+    badgeText.textContent = `${currentIndex + 1} / ${images.length} · Deslizar`;
+  }
+}
+
+function prevCardPhoto(btn) {
+  const card = btn.closest('.project-card');
+  if (card) stepCardPhoto(card, -1);
+}
+
+function nextCardPhoto(btn) {
+  const card = btn.closest('.project-card');
+  if (card) stepCardPhoto(card, 1);
+}
+
+function setupCardSwipers() {
+  const multiCards = document.querySelectorAll('.project-card[data-images]');
+  multiCards.forEach(card => {
+    let images = [];
+    try {
+      images = JSON.parse(card.getAttribute('data-images') || '[]');
+    } catch (e) {
+      return;
+    }
+    if (images.length <= 1) return;
+
+    card.dataset.cardImageIndex = '0';
+    const thumb = card.querySelector('.project-media-thumb');
+    if (!thumb) return;
+
+    let startX = 0;
+    let startY = 0;
+    let isPointerDown = false;
+    let hasSwiped = false;
+
+    thumb.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      startX = e.clientX;
+      startY = e.clientY;
+      isPointerDown = true;
+      hasSwiped = false;
+    });
+
+    thumb.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const diffX = e.clientX - startX;
+      const diffY = e.clientY - startY;
+      if (Math.abs(diffX) > 20 && Math.abs(diffX) > Math.abs(diffY)) {
+        hasSwiped = true;
+      }
+    });
+
+    const handlePointerEnd = (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      const diffX = e.clientX - startX;
+      const diffY = e.clientY - startY;
+
+      if (Math.abs(diffX) > 25 && Math.abs(diffX) > Math.abs(diffY)) {
+        hasSwiped = true;
+        if (diffX < 0) {
+          stepCardPhoto(card, 1);
+        } else {
+          stepCardPhoto(card, -1);
+        }
+      }
+    };
+
+    thumb.addEventListener('pointerup', handlePointerEnd);
+    thumb.addEventListener('pointercancel', () => { isPointerDown = false; });
+
+    thumb.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      hasSwiped = false;
+    }, { passive: true });
+
+    thumb.addEventListener('touchend', (e) => {
+      const diffX = e.changedTouches[0].clientX - startX;
+      const diffY = e.changedTouches[0].clientY - startY;
+      if (Math.abs(diffX) > 25 && Math.abs(diffX) > Math.abs(diffY)) {
+        hasSwiped = true;
+        if (diffX < 0) {
+          stepCardPhoto(card, 1);
+        } else {
+          stepCardPhoto(card, -1);
+        }
+      }
+    }, { passive: true });
+
+    // Evitar que el gesto de swipe active accidentalmente el click del modal
+    card.addEventListener('click', (e) => {
+      if (hasSwiped) {
+        e.stopPropagation();
+        e.preventDefault();
+        hasSwiped = false;
+      }
+    }, true);
+  });
 }
 
 // Inicialización de accesibilidad y eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
   setupGalleryTouchGestures();
   setupProjectTouchGestures();
+  setupCardSwipers();
 
   const clickableCards = document.querySelectorAll('.clickable-card');
   clickableCards.forEach(card => {
