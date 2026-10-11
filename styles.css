@@ -690,7 +690,7 @@ h1, h2, h3, .project-title, .hero-name {
 
 .thumb-slide {
   object-fit: cover;
-  object-position: 0% 50%;
+  object-position: center center;
   background-color: #0c1b33;
 }
 
